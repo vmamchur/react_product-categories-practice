@@ -49,11 +49,14 @@ const products = productsFromServer
   }));
 
 export const App: React.FC = () => {
-  const [productsList] = useState<ProductWithUserAndCategory[]>(products);
+  const [productsList,
+    setProductsList
+  ] = useState<ProductWithUserAndCategory[]>(products);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const selectUser = (user: User) => {
     setSelectedUser(user);
+    setProductsList(products.filter(product => product.user === user));
   };
 
   return (
